@@ -2,7 +2,7 @@
 
 The first step when creating a LM hash is converting user's password to uppercase, so "password" and "pAsSwwOrd" have the same LM hash and the password cracked  from these hashes with tools like hashcat is "PASSWORD". 
 
-But having the NTLM and a cracked LM hash, it is possible to get the original password by testing all the combinations of upper and lowercases. This is useful if a ntds.dit file of a Domain Controller in a domain has both NTLM and not null LM hashes (different to *3dfd5485244e799809752a3293831d17*).
+Having the NTLM and a cracked LM hash it is possible to get the original password by testing all the combinations of upper and lowercases. This is useful if a ntds.dit file has both NTLM and LM hashes (different to *3dfd5485244e799809752a3293831d17*).
 
 
 ## Usage
