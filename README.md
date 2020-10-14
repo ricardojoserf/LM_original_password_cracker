@@ -2,7 +2,7 @@
 
 The first step when creating a LM hash is converting user's password to uppercase, so "password" and "pAsSwwOrd" have the same LM hash and the password cracked  from these hashes with tools like hashcat is "PASSWORD". 
 
-Having the NTLM and a cracked LM hash it is possible to get the original password by testing all the combinations of upper and lowercases. This is useful if a ntds.dit file has both NTLM and LM hashes (different to *3dfd5485244e799809752a3293831d17*).
+Having the NTLM and a cracked LM hash it is possible to get the original password by testing all the combinations of upper and lowercases. This is useful if a ntds.dit file has both NTLM and LM hashes (LM hashes different to *3dfd5485244e799809752a3293831d17*).
 
 
 ## Usage
@@ -10,7 +10,7 @@ Having the NTLM and a cracked LM hash it is possible to get the original passwor
 For a single hash
 
 ```
-python3 main.py -f ntlm_pass.txt -n NTLM_HASH -p UPPERCASE_PASSWORD
+python3 main.py -n NTLM_HASH -p UPPERCASE_PASSWORD
 ```
 
 For a file with a list in the format *NTLM_HASH:UPPERCASE_PASSWORD*:
