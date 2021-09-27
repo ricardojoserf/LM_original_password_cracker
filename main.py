@@ -7,9 +7,11 @@ import hashlib,binascii
 
 def get_args():
 	parser = argparse.ArgumentParser()
-	parser.add_argument('-n', '--ntlm_hash', required=False, default=None, action='store', help='NTLM hash')
+	parser.add_argument('-h', '--ntlm_hash', required=False, default=None, action='store', help='NTLM hash')
 	parser.add_argument('-p', '--password', required=False, default=None, action='store', help='Uppercase password')
-	parser.add_argument('-f', '--file', required=False, default=None, action='store', help='File in the format NTLM:PASSWORD')
+	parser.add_argument('-f', '--ntlm-file', required=False, default=None, action='store', help='File in the format NTLM:PASSWORD')
+	parser.add_argument('-l', '--lm-file', required=False, default=None, action='store', help='File in the format LM:PASSWORD')
+	parser.add_argument('-n', '--ntds-dit', required=False, default=None, action='store', help='Ntds.dit file')
 	return parser
 
 
@@ -20,8 +22,7 @@ def get_ntlm(s):
 
 def get_permutations(passwd):
 	# source: https://stackoverflow.com/questions/11144389/find-all-upper-lower-and-mixed-case-combinations-of-a-string/11165671
-	lu_sequence = ((c.lower(), c.upper()) if c.isalpha() else c for c in passwd)
-	return [''.join(x) for x in it.product(*lu_sequence)]
+	return [''.join(x) for x in it.product(*((c.lower(), c.upper()) if c.isalpha() else c for c in passwd))]
 
 
 def get_passwd(uppercase_passwd, ntlm_hash):
