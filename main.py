@@ -7,11 +7,11 @@ import hashlib,binascii
 
 def get_args():
 	parser = argparse.ArgumentParser()
-	parser.add_argument('-h', '--ntlm_hash', required=False, default=None, action='store', help='NTLM hash')
+	parser.add_argument('-n', '--nthash', required=False, default=None, action='store', help='NT hash')
 	parser.add_argument('-p', '--password', required=False, default=None, action='store', help='Uppercase password')
-	parser.add_argument('-f', '--ntlm-file', required=False, default=None, action='store', help='File in the format NTLM:PASSWORD')
-	parser.add_argument('-l', '--lm-file', required=False, default=None, action='store', help='File in the format LM:PASSWORD')
-	parser.add_argument('-n', '--ntds-dit', required=False, default=None, action='store', help='Ntds.dit file')
+	parser.add_argument('-np', '--ntpassword', required=False, default=None, action='store', help='File in the format NT:PASSWORD')
+	parser.add_argument('-lp', '--lmpassword', required=False, default=None, action='store', help='File in the format LM:PASSWORD')
+	parser.add_argument('-nd', '--ntdsdit', required=False, default=None, action='store', help='Ntds.dit file')
 	return parser
 
 
@@ -36,8 +36,8 @@ def get_passwd(uppercase_passwd, ntlm_hash):
 def main():
 	args = get_args().parse_args()
 	uppercase_passwd =  args.password
-	ntlm_hash =         args.ntlm_hash
-	file =              args.file
+	ntlm_hash =         args.ntlm
+	file =              args.ntlmfile
 	if not (uppercase_passwd is None and ntlm_hash is None):
 		ntlm,cleartext_passwd = get_passwd(uppercase_passwd, ntlm_hash)
 		print(ntlm+":"+cleartext_passwd)
