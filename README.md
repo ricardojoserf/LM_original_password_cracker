@@ -10,19 +10,19 @@ However, having the NTLM and a cracked LM hash it is possible to get the origina
 For a single hash
 
 ```
-python3 main.py -h NTLM_HASH -p UPPERCASE_PASSWORD
+python3 main.py -n NTLM_HASH -p UPPERCASE_PASSWORD
 ```
 
 For a file with a list in the format *NTLM_HASH:UPPERCASE_PASSWORD*:
 
 ```
-python3 main.py -f ntlm_pass.txt
+python3 main.py -np ntlm_pass.txt
 ```
 
 For a file with *LM_HASH:UPPERCASE_PASSWORD* and a ntds.dit file:
 
 ```
-python3 main.py -l lm_pass.txt -n ntds.dit
+python3 main.py -lp lm_pass.txt -nd ntds.dit
 ```
 
 
@@ -43,7 +43,7 @@ hashcat -m 3000 ntds.dit --show | sort -u | tee lm_pass.txt
 Retrieve the cleartext passwords with the script:
 
 ```
-python3 main.py -l lm_pass.txt -n ntds.dit
+python3 main.py -lp lm_pass.txt -nd ntds.dit
 ```
 
 
@@ -56,5 +56,5 @@ for i in $(cat lm_pass.txt); do lm=$(echo $i | cut -d ":" -f 1); pass=$(echo $i 
 Retrieve the cleartext passwords with the script:
 
 ```
-python3 main.py -f ntlm_pass.txt
+python3 main.py -np ntlm_pass.txt
 ```
